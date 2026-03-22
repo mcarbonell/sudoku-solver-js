@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Sudoku <span>Solver</span></h1>
+
+<div class="controls">
+    <select id="algo-select">
+        <option value="tryouts">Tryouts (history heuristic)</option>
+        <option value="queue">Queue (best-first)</option>
+        <option value="backtracking">Backtracking</option>
+    </select>
+    <button id="solve-btn">Solve</button>
+    <button id="anim-btn" class="secondary">▶ Animate</button>
+    <button id="stop-btn" class="secondary">■ Stop</button>
+    <div class="speed-wrap">
+        <span>Speed</span>
+        <input type="range" id="speed" min="1" max="100" value="50">
+        <span>Fast</span>
+    </div>
+</div>
+
+<div class="presets">
+    <button data-preset="Easy">Easy</button>
+    <button data-preset="Medium">Medium</button>
+    <button data-preset="Hard">Hard</button>
+    <button data-preset="Hardest">Hardest</button>
+    <button data-preset="Extreme">Extreme</button>
+</div>
+
+<div class="controls">
+    <input type="text" id="puzzle-input" placeholder="Paste 81-digit puzzle (0 = empty)" maxlength="81">
+</div>
+
+<div id="status" class="status">Ready</div>
+
+<div class="main">
+    <div class="board-wrap">
+        <div class="board-label">Board</div>
+        <div class="sudoku-grid" id="grid"></div>
+    </div>
+
+    <div class="info-panel">
+        <div class="stat-box">
+            <h3>Stats</h3>
+            <div class="stat-row"><span>Algorithm</span><span class="val" id="stat-algo">tryouts</span></div>
+            <div class="stat-row"><span>Steps</span><span class="val" id="stat-steps">—</span></div>
+            <div class="stat-row"><span>Nodes</span><span class="val" id="stat-nodes">—</span></div>
+            <div class="stat-row"><span>Time</span><span class="val" id="stat-time">—</span></div>
+        </div>
+
+        <div class="stat-box">
+            <h3>Algorithms</h3>
+            <div class="stat-row" style="flex-direction:column; gap:.3rem; align-items:flex-start">
+                <strong style="font-size:.85rem">Tryouts</strong>
+                <span style="font-size:.8rem;color:#555">Stochastic restart with history heuristic. Learns from failures.</span>
+            </div>
+            <div class="stat-row" style="flex-direction:column; gap:.3rem; align-items:flex-start; padding-top:.5rem">
+                <strong style="font-size:.85rem">Queue</strong>
+                <span style="font-size:.8rem;color:#555">Best-first search. Explores most promising states first.</span>
+            </div>
+            <div class="stat-row" style="flex-direction:column; gap:.3rem; align-items:flex-start; padding-top:.5rem">
+                <strong style="font-size:.85rem">Backtracking</strong>
+                <span style="font-size:.8rem;color:#555">Iterative deepening with pruning by used alternatives.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <a href="https://github.com/mrcm/sudoku-solver-js" target="_blank" rel="noopener">View source on GitHub ↗</a>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: system-ui, sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+}
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h1 span {
+    color: #4361ee;
+}
+
+/* ── Controls ── */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+select, button, input[type="text"] {
+    font-size: .9rem;
+    padding: .45rem .85rem;
+    border-radius: 8px;
+    border: 1.5px solid #cdd;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+}
+
+select:focus, input[type="text"]:focus { outline: none; border-color: #4361ee; }
+
+button {
+    background: #4361ee;
+    color: #fff;
+    border-color: #4361ee;
+    font-weight: 600;
+}
+button:hover  { background: #3451d1; }
+button:active { background: #2a40b8; }
+button:disabled { background: #a0aec0; border-color: #a0aec0; cursor: not-allowed; }
+
+button.secondary {
+    background: #fff;
+    color: #4361ee;
+    border-color: #4361ee;
+}
+button.secondary:hover { background: #eef0fd; }
+
+input[type="text"] {
+    width: 26ch;
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+/* ── Speed slider ── */
+.speed-wrap {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .85rem;
+    color: #555;
+}
+input[type="range"] { width: 90px; accent-color: #4361ee; }
+
+/* ── Main layout ── */
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* ── Sudoku grid ── */
+.board-wrap { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+.board-label { font-size: .8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    border: 3px solid #1a1a2e;
+    border-radius: 4px;
+    overflow: hidden;
+    width: min(90vw, 400px);
+    aspect-ratio: 1;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(.9rem, 2.5vw, 1.3rem);
+    font-weight: 500;
+    border: 1px solid #ccc;
+    background: #fff;
+    transition: background .12s, color .12s;
+    cursor: default;
+    user-select: none;
+    aspect-ratio: 1;
+    min-height: 0;
+    min-width: 0;
+}
+
+/* Box borders */
+.cell[data-col="2"], .cell[data-col="5"] { border-right: 2.5px solid #1a1a2e; }
+.cell[data-row="2"], .cell[data-row="5"] { border-bottom: 2.5px solid #1a1a2e; }
+
+/* Cell states */
+.cell.given    { color: #1a1a2e; font-weight: 700; background: #f7f7f7; }
+.cell.solved   { color: #4361ee; }
+.cell.active   { background: #dce3ff; color: #2a40b8; }
+.cell.conflict { background: #ffe0e0; color: #c0392b; }
+.cell.flash    { animation: flash .3s ease; }
+
+@keyframes flash {
+    0%   { background: #b8f0c8; }
+    100% { background: #fff; }
+}
+
+/* ── Info panel ── */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 200px;
+    max-width: 260px;
+}
+
+.stat-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+
+.stat-box h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: .6rem; }
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: .9rem;
+    padding: .2rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row .val { font-weight: 600; color: #4361ee; }
+
+/* ── Status bar ── */
+.status {
+    font-size: .9rem;
+    padding: .4rem 1rem;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    min-width: 200px;
+    text-align: center;
+}
+.status.ok      { color: #27ae60; font-weight: 600; }
+.status.error   { color: #c0392b; font-weight: 600; }
+.status.running { color: #4361ee; }
+
+/* ── Footer ── */
+footer {
+    font-size: .82rem;
+    color: #888;
+    padding: .5rem 0 1rem;
+}
+footer a { color: #4361ee; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ── Preset list ── */
+.presets { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; }
+.presets button {
+    font-size: .78rem;
+    padding: .3rem .65rem;
+    background: #fff;
+    color: #333;
+    border-color: #cdd;
+    font-weight: 500;
+}
+.presets button:hover { border-color: #4361ee; color: #4361ee; background: #eef0fd; }
