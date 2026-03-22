@@ -2,7 +2,7 @@
 
 Interactive Sudoku solver in vanilla JavaScript with step-by-step animation.
 
-**[Live demo](https://mrcm.github.io/sudoku-solver-js)**
+**[Live demo](https://mcarbonell.github.io/sudoku-solver-js)**
 
 ## Features
 
@@ -55,7 +55,7 @@ sudoku-solver-js/
 
 ## Related
 
-- [sudoku-solver-php](https://github.com/mrcm/sudoku-solver-php) — original PHP implementation
+- [sudoku-solver-php](https://github.com/mcarbonell/sudoku-solver-php) — original PHP implementation
 
 ## License
 
