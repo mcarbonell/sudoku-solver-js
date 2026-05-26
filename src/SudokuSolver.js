@@ -1,6 +1,84 @@
-// SudokuSolver — three algorithms with step-by-step generator support
+// SudokuSolver — three optimized algorithms with step-by-step generator support (Optimized V2)
 
-import { Sudoku } from './Sudoku.js';
+import { Sudoku, POPCOUNT, VALUES } from './Sudoku.js';
+
+// Precomputed 27 units (9 rows, 9 cols, 9 boxes) to avoid dynamic allocations during Hidden Singles checks
+const UNITS = [];
+// 9 Rows
+for (let r = 0; r < 9; r++) {
+    const row = new Uint8Array(9);
+    for (let c = 0; c < 9; c++) row[c] = r * 9 + c;
+    UNITS.push(row);
+}
+// 9 Columns
+for (let c = 0; c < 9; c++) {
+    const col = new Uint8Array(9);
+    for (let r = 0; r < 9; r++) col[r] = r * 9 + c;
+    UNITS.push(col);
+}
+// 9 Boxes
+for (let b = 0; b < 9; b++) {
+    const box = new Uint8Array(9);
+    const br = Math.floor(b / 3) * 3;
+    const bc = (b % 3) * 3;
+    for (let i = 0; i < 9; i++) {
+        box[i] = (br + Math.floor(i / 3)) * 9 + (bc + i % 3);
+    }
+    UNITS.push(box);
+}
+
+// Highly efficient Binary Heap (Min-Heap) for O(log N) priority queue operations in Best-First search
+class MinHeap {
+    constructor() {
+        this.heap = [];
+    }
+
+    push(item) {
+        this.heap.push(item);
+        this._up(this.heap.length - 1);
+    }
+
+    pop() {
+        if (this.heap.length === 0) return null;
+        const top = this.heap[0];
+        const bottom = this.heap.pop();
+        if (this.heap.length > 0) {
+            this.heap[0] = bottom;
+            this._down(0);
+        }
+        return top;
+    }
+
+    get length() {
+        return this.heap.length;
+    }
+
+    _up(i) {
+        while (i > 0) {
+            const p = (i - 1) >> 1;
+            if (this.heap[i].getScore() >= this.heap[p].getScore()) break;
+            const tmp = this.heap[i];
+            this.heap[i] = this.heap[p];
+            this.heap[p] = tmp;
+            i = p;
+        }
+    }
+
+    _down(i) {
+        const len = this.heap.length;
+        while ((i << 1) + 1 < len) {
+            let child = (i << 1) + 1;
+            if (child + 1 < len && this.heap[child + 1].getScore() < this.heap[child].getScore()) {
+                child++;
+            }
+            if (this.heap[i].getScore() <= this.heap[child].getScore()) break;
+            const tmp = this.heap[i];
+            this.heap[i] = this.heap[child];
+            this.heap[child] = tmp;
+            i = child;
+        }
+    }
+}
 
 export class SudokuSolver {
 
@@ -26,44 +104,43 @@ export class SudokuSolver {
     }
 
     // -------------------------------------------------------------------------
-    // Shared helpers
+    // Shared helpers (Optimized)
     // -------------------------------------------------------------------------
 
     _getMoves(sudoku) {
-        // Returns moves grouped by number of candidates, lowest first
-        const byCount = {};
-
+        // 1. Quick validation: check if any empty cell has 0 candidates
         for (let i = 0; i < 81; i++) {
-            if (sudoku.grid[i]) continue;
-            const cands = sudoku.candidates[i];
-            if (!cands || cands.size === 0) return null; // invalid
-            if (cands.size === 1) continue;              // handled by onlyMoves
-            const n = cands.size;
-            if (!byCount[n]) byCount[n] = [];
-            byCount[n].push({ idx: i, values: [...cands] });
+            if (sudoku.grid[i] === 0) {
+                if (sudoku.candidates[i] === 0) return null;
+            }
         }
 
-        // Hidden singles: value that appears only once in a row/col/box
-        for (let unit = 0; unit < 9; unit++) {
-            for (const getIdxs of [
-                u => Array.from({length: 9}, (_, c) => u * 9 + c),
-                u => Array.from({length: 9}, (_, r) => r * 9 + u),
-                u => { const br = Math.floor(u/3)*3, bc = (u%3)*3; return Array.from({length:9},(_,i) => (br+Math.floor(i/3))*9+(bc+i%3)); }
-            ]) {
-                const idxs = getIdxs(unit).filter(i => !sudoku.grid[i]);
-                const valueCount = {};
-                for (const i of idxs) {
-                    if (!sudoku.candidates[i]) continue;
-                    for (const v of sudoku.candidates[i]) {
-                        if (!valueCount[v]) valueCount[v] = [];
-                        valueCount[v].push(i);
+        // 2. Hidden singles scan: sweep 27 units
+        const lenUnits = UNITS.length;
+        for (let u = 0; u < lenUnits; u++) {
+            const unitIdxs = UNITS[u];
+            const counts = new Uint8Array(10);
+            const positions = new Uint8Array(10);
+
+            for (let i = 0; i < 9; i++) {
+                const idx = unitIdxs[i];
+                if (sudoku.grid[idx] === 0) {
+                    const mask = sudoku.candidates[idx];
+                    if (mask !== null) {
+                        for (let bit = 0; bit < 9; bit++) {
+                            if ((mask & (1 << bit)) !== 0) {
+                                const val = bit + 1;
+                                counts[val]++;
+                                positions[val] = idx;
+                            }
+                        }
                     }
                 }
-                for (const [v, cells] of Object.entries(valueCount)) {
-                    if (cells.length === 0) { return null; }
-                    if (cells.length === 1) {
-                        sudoku.onlyMoves.push({ idx: cells[0], value: parseInt(v) });
-                    }
+            }
+
+            for (let v = 1; v <= 9; v++) {
+                if (counts[v] === 1) {
+                    sudoku.onlyMoves.push({ idx: positions[v], value: v });
                 }
             }
         }
@@ -71,19 +148,35 @@ export class SudokuSolver {
         if (!sudoku.applyOnlyMoves()) return null;
         if (sudoku.checkSolved()) return {};
 
-        // Rebuild after only moves
-        const moves = {};
+        // 3. Rebuild and find cell with minimum remaining values (MRV)
+        let minCount = 10;
+        let minIdxs = [];
+
         for (let i = 0; i < 81; i++) {
-            if (sudoku.grid[i]) continue;
-            const cands = sudoku.candidates[i];
-            if (!cands || cands.size === 0) return null;
-            const n = cands.size;
-            if (!moves[n]) moves[n] = [];
-            moves[n].push({ idx: i, values: [...cands] });
+            if (sudoku.grid[i] === 0) {
+                const mask = sudoku.candidates[i];
+                if (mask === null || mask === 0) return null;
+                const n = POPCOUNT[mask];
+                if (n === 1) continue; // Should have been processed by onlyMoves, but skip if somehow here
+                if (n < minCount) {
+                    minCount = n;
+                    minIdxs = [i];
+                } else if (n === minCount) {
+                    minIdxs.push(i);
+                }
+            }
         }
 
-        const minKey = Object.keys(moves).map(Number).sort((a,b) => a-b)[0];
-        return minKey ? moves[minKey] : null;
+        if (minIdxs.length === 0) return null;
+
+        // Map minimum candidate cells to the expected moves array
+        const moves = [];
+        const lenMin = minIdxs.length;
+        for (let i = 0; i < lenMin; i++) {
+            const idx = minIdxs[i];
+            moves.push({ idx: idx, values: VALUES[sudoku.candidates[idx]] });
+        }
+        return moves;
     }
 
     // -------------------------------------------------------------------------
@@ -112,7 +205,7 @@ export class SudokuSolver {
                 const moves = this._getMoves(sudoku);
                 if (!moves || !sudoku.isValid) { failed = true; break; }
                 if (sudoku.checkSolved()) { this._record(sudoku, 'solved'); return sudoku; }
-                if (Object.keys(moves).length === 0) { failed = true; break; }
+                if (moves.length === 0) { failed = true; break; }
 
                 // Pick move with fewest candidates
                 const move = moves[0];
@@ -146,18 +239,18 @@ export class SudokuSolver {
     }
 
     // -------------------------------------------------------------------------
-    // Algorithm 2: Queue (best-first search)
+    // Algorithm 2: Queue (best-first search with Min-Heap)
     // -------------------------------------------------------------------------
 
     _solveQueue() {
-        const queue = [this.initial.clone()];
+        const queue = new MinHeap();
+        queue.push(this.initial.clone());
         let nodes = 0;
         const MAX_NODES = 100000;
 
         while (queue.length && nodes++ < MAX_NODES) {
-            // Pop best scored state
-            queue.sort((a, b) => a.getScore() - b.getScore());
-            const sudoku = queue.shift();
+            // Pop best scored state in O(log N) from Min-Heap
+            const sudoku = queue.pop();
 
             if (!sudoku.applyOnlyMoves() || !sudoku.isValid) continue;
             this._record(sudoku, 'expand');
@@ -205,7 +298,6 @@ export class SudokuSolver {
         if (sudoku.checkSolved()) { this._record(sudoku, 'solved'); return sudoku; }
 
         const move = moves[0];
-        const numAlt = move.values.length - 1;
 
         const branches = [];
         for (const value of move.values) {

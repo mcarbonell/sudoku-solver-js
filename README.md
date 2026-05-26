@@ -14,6 +14,8 @@ Interactive Sudoku solver in vanilla JavaScript with step-by-step animation.
 
 ## Algorithms
 
+For a detailed technical explanation of the mathematical and computer science principles behind these algorithms, check out [ALGORITHMS.md](ALGORITHMS.md) (in Spanish).
+
 ### Tryouts (default)
 Stochastic restart with history heuristic. Tracks which `(cell, value)` pairs led
 to failures and avoids them on the next attempt. Solves most puzzles in 1–2 nodes.
