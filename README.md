@@ -4,6 +4,8 @@ Interactive Sudoku solver in vanilla JavaScript with step-by-step animation.
 
 **[Live demo](https://mcarbonell.github.io/sudoku-solver-js)**
 
+![Sudoku Solver Screenshot](solver_screenshot.png)
+
 ## Features
 
 - 3 algorithms: Tryouts, Queue, Backtracking
