@@ -1,0 +1,1572 @@
+{
+  "Top 20": {
+    "tryouts": {
+      "results": [
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 7,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 5,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        }
+      ]
+    },
+    "queue": {
+      "results": [
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 8,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 5,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        }
+      ]
+    },
+    "backtracking": {
+      "results": [
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 15,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 12,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 10,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 21,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 6,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 17,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        }
+      ]
+    }
+  },
+  "Top 100 (sample 20)": {
+    "tryouts": {
+      "results": [
+        {
+          "solved": true,
+          "time": 10,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 13,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "queue": {
+      "results": [
+        {
+          "solved": true,
+          "time": 12,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 5,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 9,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "backtracking": {
+      "results": [
+        {
+          "solved": true,
+          "time": 25,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 7,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 9,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        }
+      ]
+    }
+  },
+  "17-clue (sample 20)": {
+    "tryouts": {
+      "results": [
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        }
+      ]
+    },
+    "queue": {
+      "results": [
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "backtracking": {
+      "results": [
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 4,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    }
+  },
+  "OpenSudoku VH (sample 20)": {
+    "tryouts": {
+      "results": [
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "queue": {
+      "results": [
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "backtracking": {
+      "results": [
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    }
+  },
+  "Subig 20 (sample 20)": {
+    "tryouts": {
+      "results": [
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "queue": {
+      "results": [
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 2,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    },
+    "backtracking": {
+      "results": [
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 1,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 3,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        },
+        {
+          "solved": true,
+          "time": 0,
+          "err": null
+        }
+      ]
+    }
+  }
+}

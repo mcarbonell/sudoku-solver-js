@@ -10,10 +10,11 @@ Este documento contiene un análisis técnico detallado de los tres algoritmos d
    - [Naked Singles (Solitarios Desnudos)](#naked-singles-solitarios-desnudos)
    - [Hidden Singles (Solitarios Ocultos)](#hidden-singles-solitarios-ocultos)
    - [Mínimos Valores Restantes (MRV)](#mínimos-valores-restantes-mrv)
-3. [Algoritmo 1: Tryouts (Reinicio Estocástico + Heurística de Historial)](#algoritmo-1-tryouts-reinicio-estocástico--heurística-de-historial)
+3. [Algoritmo 1: Backtracking (failure-memory)](#algoritmo-1-backtracking-failure-memory)
 4. [Algoritmo 2: Queue (Búsqueda Primero el Mejor - BFS Heurístico)](#algoritmo-2-queue-búsqueda-primero-el-mejor---bfs-heurístico)
 5. [Algoritmo 3: Backtracking LDS (Búsqueda de Discrepancia Limitada Iterativa)](#algoritmo-3-backtracking-lds-búsqueda-de-discrepancia-limitada-iterativa)
-6. [Resumen y Comparativa de Enfoques](#resumen-y-comparativa-de-enfoques)
+6. [Optimización opcional: tabla de transposición / branch-and-bound](#optimización-opcional-tabla-de-transposición--branch-and-bound)
+7. [Resumen y Comparativa de Enfoques](#resumen-y-comparativa-de-enfoques)
 
 ---
 
@@ -41,7 +42,7 @@ graph TD
 ```
 
 ### Naked Singles (Solitarios Desnudos)
-Si al aplicar las restricciones básicas a una casilla vacía su lista de candidatos se reduce a **un único número**, ese número se asigna inmediatamente. Este cambio a su vez reduce los candidatos de sus 20 celdas vecinas (su fila, columna y subcuadrícula $3 \times 3$), lo que puede desencadenar nuevos solitarios en cadena. 
+Si al aplicar las restricciones básicas a una casilla vacía su lista de candidatos se reduce a **un único número**, ese número se asigna inmediatamente. Este cambio a su vez reduce los candidatos de sus 20 celdas vecinas (su fila, columna y subcuadrícula $3 \times 3$), lo que puede desencadenar nuevos solitarios en cadena.
 
 ### Hidden Singles (Solitarios Ocultos)
 Ocurre cuando, aunque una casilla tenga múltiples candidatos individuales disponibles, **un número concreto solo puede ir en una única posición dentro de toda una fila, columna o bloque de $3 \times 3$**. El resolvedor analiza cada unidad y, si detecta esta condición, asigna el número inmediatamente.
@@ -52,41 +53,37 @@ Cuando las deducciones deterministas se agotan y es obligatorio ramificar (adivi
 
 ---
 
-## Algoritmo 1: Tryouts (Reinicio Estocástico + Heurística de Historial)
+## Algoritmo 1: Backtracking (failure-memory)
 
-Este enfoque probabilístico está inspirado en la filosofía de los resolvedores SAT industriales (como CDCL) con aprendizaje dinámico. En lugar de mantener una recursión profunda, **aprende de sus errores y reinicia**.
+> **Nota histórica:** La primera versión de este algoritmo era un *reinicio estocástico con historial global* que penalizaba todas las jugadas de cada intento fallido. Eso resultó **incompleto** en los sudokus más difíciles: al penalizar también las jugadas forzadas y las apuestas tempranas correctas, el historial aprendía a *evitar* decisiones válidas y el solver no convergía ni con miles de reinicios. Esa versión original se conserva en el repositorio como algoritmo de referencia **`tryoutsStochastic`** (seleccionable en la demo) precisamente para ilustrar la diferencia. La versión actual (descrita aquí) corrige el defecto convirtiéndose en **backtracking en profundidad con memoria de fallos**, renombrada como **Backtracking (failure-memory)**.
 
 ```mermaid
 flowchart TD
-    Start([Inicio de Intento]) --> Clone[Clonar Tablero Inicial]
-    Clone --> Prop[Propagar Restricciones]
+    Start([Inicio]) --> Prop[Propagar Restricciones]
     Prop --> Check{¿Resuelto?}
     Check -- Sí --> Solved([¡Solucionado!])
-    Check -- No --> Moves{¿Tiene movimientos válidos?}
-    
-    Moves -- No / Conflicto --> Penalize[Penalizar jugadas realizadas en el historial] --> Restart[Reiniciar Búsqueda]
-    Moves -- Sí --> Pick[Seleccionar celda con menos candidatos]
-    
-    Pick --> Sort[Ordenar candidatos usando historial de fallos]
-    Sort --> Apply[Aplicar el candidato con menor penalización]
-    Apply --> CheckValid{¿Válido?}
-    CheckValid -- No --> PenaltySingle[Penalizar jugada específica] --> Restart
-    CheckValid -- Sí --> Prop
-    
-    Restart --> Start
+    Check -- No --> Moves{¿Tiene movimientos?}
+    Moves -- No / Conflicto --> Backtrack[Retroceder al padre]
+    Backtrack --> Parent{¿Quedan candidatas en el padre?}
+    Parent -- Sí --> PickPadre[Probar siguiente candidata del padre]
+    Parent -- No --> Backtrack
+    Moves -- Sí --> Pick[Seleccionar celda MRV]
+    Pick --> Sort[Ordenar candidatas por memoria de fallos]
+    Sort --> Apply[Aplicar la menos penalizada]
+    Apply --> Valid{¿Válido?}
+    Valid -- No --> Penalize[Penalizar SOLO esta apuesta] --> Backtrack
+    Valid -- Sí --> Prop
 ```
 
 ### Mecánica Interna
-1. **Historial de Fallos:** Mantiene un registro global indexado por la clave `"celda,valor"`, que cuenta cuántas veces esa asignación específica participó en un intento fallido de resolución.
-2. **Selección por Reputación:** En cada paso de decisión, toma la celda seleccionada por MRV y ordena sus candidatos disponibles según su historial. **Prueba primero el candidato que haya fallado menos veces**.
-3. **Reinicios Agresivos:** Si se produce un conflicto matemático (una celda se queda sin candidatos tras propagar):
-   - Se penaliza la jugada actual.
-   - Si colapsó todo el camino, se penalizan todas las decisiones intermedias tomadas.
-   - El tablero se descarta por completo y se reinicia la resolución desde cero con el historial actualizado.
+1. **Solo se "apuesta" en puntos de bifurcación:** El algoritmo toma una decisión de prueba y error **exclusivamente** en celdas con varios candidatos (MRV). Las jugadas forzadas (Naked/Hidden Singles) son consecuencia determinista de la propagación y **nunca** forman parte de las apuestas.
+2. **Orden por memoria de fallos:** En cada bifurcación, las candidatas de la celda se ordenan según un historial global indexado por la clave `"celda,valor"`. Se prueba primero la candidata que ha fallado menos veces.
+3. **Backtracking recursivo con propagación de fallo:** Se explora en profundidad. Si una candidata conduce a contradicción, se **retrocede al padre** y se prueba su siguiente candidata. Cuando una celda agota *todas* sus candidatas, el fallo se propaga automáticamente al padre (retorno `null` de la recursión). Como por definición del Sudoku **toda celda debe tener un valor válido**, una celda agotada implica que el prefijo (las decisiones anteriores) es inconsistente; por tanto, la culpa sube al padre. No se necesita CDCL ni cláusulas de conflicto para mantener la completitud.
+4. **Penalización quirúrgica:** Solo se penaliza la **apuesta concreta fallida** `(celda, valor)`, nunca el camino completo ni las jugadas forzadas. La penalización es una *pista suave de ordenación*, no una prohibición: una candidata que falló en un prefijo se vuelve a intentar más tarde en otro contexto, por lo que la búsqueda sigue siendo **completa** (siempre resuelve un Sudoku resoluble).
 
 ### Análisis
-- **Ventajas:** Excelente para escapar de "trampas" de búsqueda profunda. Su adaptabilidad probabilística le permite resolver rompecabezas difíciles con muy pocos nodos explorados una vez que el historial de errores descarta los caminos incorrectos.
-- **Desventajas:** Puede presentar una variabilidad de tiempos ligeramente mayor en rompecabezas extremadamente ambiguos (con muy pocas pistas iniciales).
+- **Ventajas:** Completo y muy eficiente. Resuelve los sudokus conocidos más difíciles (conjuntos *top20*, *top1465*, *17-clue*) en unas pocas decenas a pocos cientos de "intentos de bifurcación" y menos de ~3 ms de media. Memoria baja (pila de recursión + clónicos de rama).
+- **Desventajas:** Determinista (no aprovecha aleatoriedad), aunque la memoria de fallos aporta el sesgo de "evitar lo que ya sé que no funciona".
 
 ---
 
@@ -104,7 +101,7 @@ Es una búsqueda en grafo (Best-First Search) que explora el espacio de estados 
 
 ### Análisis
 - **Ventajas:** Encuentra caminos directos y eficientes en Sudokus con estructuras lógicas moderadas. Evita el reinicio destructivo al conservar otros caminos activos en paralelo.
-- **Desventajas:** Elevado consumo de memoria al clonar y almacenar decenas de tableros concurrentemente. Además, la ordenación repetida de la cola tiene un alto coste computacional.
+- **Desventajas:** Consumo de memoria **moderado**: mantiene varios tableros vivos en la cola, pero en la práctica el pico de estados concurrentes es comparable a la profundidad de recursión del backtracking (el árbol de Sudoku es estrecho, ver benchmark). La ordenación repetida de la cola tiene un coste computacional algo mayor que el DFS puro.
 
 ---
 
@@ -135,12 +132,28 @@ Nivel 2 (maxAlt = 2) ──> Permite hasta dos decisiones secundarias o una deci
 
 ---
 
+## Optimización opcional: tabla de transposición / branch-and-bound
+
+*Mejora pendiente de cablear al código; se documenta aquí como optimización opcional para Tryouts (y, en general, para cualquier algoritmo de búsqueda del solver).*
+
+La idea (análoga a las **tablas hash de los motores de ajedrez**) es no recorrer dos veces un mismo subproblema:
+
+1. **Clave de estado:** Se calcula un *hash* del tablero parcial (por ejemplo, la cadena de 81 celdas o una huella más compacta de celdas ocupadas + candidatos).
+2. **Valor cacheado:** Para esa clave se guarda el **número de celdas restantes** (o una cota inferior del trabajo necesario para completarlo) observado hasta el momento.
+3. **Poda por cota:** Al entrar en un estado, si su número de celdas restantes es **igual o peor** que el ya registrado para esa clave, se descarta la rama (no puede mejorar lo ya visto). De este modo solo se profundiza cuando se promete un camino más corto.
+4. **Alcance de la penalización:** Estas celdas "penalizadas/marcadas" **no deben influir en los *singles*** (jugadas forzadas) — solo se usan para **priorizar en los momentos de bifurcación** (ordenar candidatas en celdas MRV), nunca para invalidar deducciones deterministas.
+
+*Caveat:* en Sudoku hay muchas menos transposiciones que en ajedrez (el árbol de búsqueda es más lineal y los estados rara vez se repiten por caminos distintos), así que el golpe de cache es menor que en un motor de ajedrez. La métrica "celdas restantes" además es una cota gruesa (dos estados con igual número de huecos pueden diferir mucho en dificultad), por lo que esta optimización conviene como poda secundaria **encima** del backtracking + memoria de fallos, no como reemplazo.
+
+---
+
 ## Resumen y Comparativa de Enfoques
 
-| Característica | Tryouts (Historial) | Queue (Best-First) | Backtracking (LDS) |
+| Característica | Backtracking (failure-memory) | Queue (Best-First) | Backtracking (LDS) |
 | :--- | :--- | :--- | :--- |
-| **Tipo de Búsqueda** | Estocástica con Reinicios | Primero el Mejor (BFS) | DFS con Discrepancia |
-| **Uso de Memoria** | Muy bajo (1 tablero activo) | Alto (múltiples tableros en cola) | Bajo (pila de recursión) |
-| **Determinismo** | No (probabilístico) | Sí | Sí |
-| **Ideal para...** | Tableros difíciles con patrones ocultos | Tableros estructurados con pistas uniformes | Tableros de extrema dificultad y alta ambigüedad |
-| **Comportamiento ante fallos** | Reinicia y aprende del error | Regresa al siguiente mejor estado en cola | Retrocede respetando el límite de discrepancia |
+| **Tipo de Búsqueda** | DFS con memoria de fallos (penalización de apuesta concreta) | Primero el Mejor (BFS) | DFS con Discrepancia |
+| **Uso de Memoria** | Bajo (pila de recursión + clónicos de rama) | Moderado (estados concurrentes ≈ profundidad DFS en la práctica) | Bajo (pila de recursión) |
+| **Determinismo** | Sí | Sí | Sí |
+| **Completitud** | Sí (resuelve cualquier Sudoku resoluble) | Sí | Sí |
+| **Ideal para...** | Cualquier Sudoku, incluidos los más difíciles | Tableros estructurados con pistas uniformes | Tableros de extrema dificultad y alta ambigüedad |
+| **Comportamiento ante fallos** | Retrocede al padre y prueba la siguiente candidata; penaliza la apuesta concreta fallida | Regresa al siguiente mejor estado en cola | Retrocede respetando el límite de discrepancia |

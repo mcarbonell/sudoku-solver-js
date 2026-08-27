@@ -12,9 +12,10 @@
 
 <div class="controls">
     <select id="algo-select">
-        <option value="tryouts">Tryouts (history heuristic)</option>
+        <option value="backtrackingfm" selected>Backtracking (failure-memory)</option>
+        <option value="tryoutsStochastic">Tryouts Stochastic (baseline)</option>
         <option value="queue">Queue (best-first)</option>
-        <option value="backtracking">Backtracking</option>
+        <option value="backtracking">Backtracking (LDS)</option>
     </select>
     <button id="solve-btn">Solve</button>
     <button id="anim-btn" class="secondary">▶ Animate</button>
@@ -49,7 +50,7 @@
     <div class="info-panel">
         <div class="stat-box">
             <h3>Stats</h3>
-            <div class="stat-row"><span>Algorithm</span><span class="val" id="stat-algo">tryouts</span></div>
+            <div class="stat-row"><span>Algorithm</span><span class="val" id="stat-algo">backtrackingfm</span></div>
             <div class="stat-row"><span>Steps</span><span class="val" id="stat-steps">—</span></div>
             <div class="stat-row"><span>Nodes</span><span class="val" id="stat-nodes">—</span></div>
             <div class="stat-row"><span>Time</span><span class="val" id="stat-time">—</span></div>
